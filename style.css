@@ -192,8 +192,56 @@ img {
 }
 
 /* ── Responsive ── */
-@media (max-width: 620px) {
-  td { width: 90px; height: 90px; }
+
+/* Large desktops (1200px+): already the default, but reinforce */
+@media (min-width: 1200px) {
+  td { width: 180px; height: 180px; }
+  table { border-spacing: 14px; }
+  #grid { padding: 20px; }
+}
+
+/* Tablets landscape / small desktops (900px–1199px) */
+@media (max-width: 1199px) and (min-width: 900px) {
+  td { width: 140px; height: 140px; }
+  table { border-spacing: 10px; }
+}
+
+/* Tablets portrait (600px–899px) */
+@media (max-width: 899px) and (min-width: 600px) {
+  td { width: 110px; height: 110px; }
+  table { border-spacing: 8px; }
+  #grid { padding: 12px; }
+  td button { font-size: 1.6rem; }
+  #displayCount,
+  #isItMatch { font-size: 1rem; padding: 9px 20px; }
+  #resetGame { font-size: 0.9rem; padding: 12px 24px; }
+  body { padding: 24px 12px 36px; gap: 18px; }
+}
+
+/* Mobile landscape / large phones (480px–599px) */
+@media (max-width: 599px) and (min-width: 480px) {
+  td { width: 88px; height: 88px; }
   table { border-spacing: 6px; }
-  #resetGame { font-size: 0.85rem; padding: 12px 20px; }
+  #grid { padding: 10px; border-radius: 12px; }
+  td button { font-size: 1.4rem; border-radius: 8px; }
+  td { border-radius: 8px; }
+  #displayCount,
+  #isItMatch { font-size: 0.95rem; padding: 8px 16px; min-width: 0; width: 100%; }
+  #resetGame { font-size: 0.85rem; padding: 11px 20px; }
+  body { padding: 20px 10px 32px; gap: 14px; }
+}
+
+/* Mobile portrait (below 480px) */
+@media (max-width: 479px) {
+  td { width: 68px; height: 68px; }
+  table { border-spacing: 5px; }
+  #grid { padding: 8px; border-radius: 10px; }
+  td button { font-size: 1.1rem; border-radius: 6px; border-width: 1px; }
+  td button:has(img) { padding: 6px; }
+  td { border-radius: 6px; }
+  #displayCount,
+  #isItMatch { font-size: 0.85rem; padding: 7px 14px; min-width: 0; width: 100%; letter-spacing: 0; }
+  #resetGame { font-size: 0.8rem; padding: 10px 16px; letter-spacing: 0; text-align: center; width: 100%; max-width: 320px; }
+  body { padding: 16px 8px 28px; gap: 12px; }
+  body::before { letter-spacing: 2px; }
 }
