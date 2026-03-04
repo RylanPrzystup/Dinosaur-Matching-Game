@@ -1,0 +1,199 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Dirt&family=Cabin:wght@400;600&display=swap');
+
+/* ── Reset & Base ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background-color: #2b1d0e;
+  background-image:
+    radial-gradient(ellipse at 20% 10%, #4a2e10 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 90%, #3d1f08 0%, transparent 50%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+  font-family: 'Cabin', sans-serif;
+  color: #f0ddb8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 16px 48px;
+  gap: 24px;
+}
+
+/* ── Page Title ── */
+body::before {
+  content: "🦕 DINO MEMORY";
+  font-family: 'Rubik Dirt', cursive;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  color: #e8a84e;
+  text-shadow:
+    3px 3px 0 #7a3f10,
+    0 0 40px rgba(232, 168, 78, 0.3);
+  letter-spacing: 4px;
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* ── Grid wrapper ── */
+#grid {
+  background: rgba(255,255,255,0.03);
+  border: 2px solid rgba(232, 168, 78, 0.2);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow:
+    0 0 60px rgba(0,0,0,0.6),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 10px;
+  border: none !important;
+}
+
+/* ── Cells ── */
+td {
+  width: 160px;
+  height: 160px;
+  padding: 0;
+  border: none !important;
+  border-radius: 12px;
+  background: #3d2409;
+  box-shadow:
+    inset 0 2px 4px rgba(0,0,0,0.5),
+    0 2px 0 rgba(255,255,255,0.05);
+  overflow: hidden;
+  transition: transform 0.15s ease;
+}
+
+td:has(button:hover) {
+  transform: translateY(-2px);
+}
+
+/* ── Buttons ── */
+td button {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(145deg, #5c3415, #3d2409);
+  border: 2px solid #7a4a1e;
+  border-radius: 12px;
+  cursor: pointer;
+  font-family: 'Rubik Dirt', cursive;
+  font-size: 2rem;
+  color: #c4965a;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    box-shadow 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+td button:hover {
+  background: linear-gradient(145deg, #7a4a1e, #5c3415);
+  border-color: #e8a84e;
+  box-shadow: 0 0 16px rgba(232, 168, 78, 0.35);
+  color: #e8c87a;
+}
+
+td button:active {
+  transform: scale(0.97);
+}
+
+/* revealed tile */
+td button:has(img) {
+  background: linear-gradient(145deg, #f5e8c8, #e0c99a);
+  border-color: #c8a050;
+  cursor: default;
+  padding: 10px;
+}
+
+/* ── Images inside buttons ── */
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 6px;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+/* ── Status bar ── */
+#displayCount,
+#isItMatch {
+  font-family: 'Cabin', sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  padding: 10px 28px;
+  border-radius: 100px;
+  text-align: center;
+}
+
+#displayCount {
+  background: rgba(232, 168, 78, 0.12);
+  border: 1px solid rgba(232, 168, 78, 0.35);
+  color: #e8c87a;
+}
+
+#isItMatch {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #c4a880;
+  min-width: 280px;
+  transition: color 0.3s, background 0.3s;
+}
+
+#isItMatch:not(:empty) {
+  animation: pop 0.3s ease;
+}
+
+@keyframes pop {
+  0%   { transform: scale(0.95); }
+  60%  { transform: scale(1.04); }
+  100% { transform: scale(1); }
+}
+
+/* ── Reset Button ── */
+#resetGame {
+  font-family: 'Rubik Dirt', cursive;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  color: #2b1d0e;
+  background: linear-gradient(135deg, #e8a84e, #c47a20);
+  border: none;
+  border-radius: 50px;
+  padding: 14px 32px;
+  cursor: pointer;
+  box-shadow:
+    0 4px 0 #7a3f10,
+    0 6px 20px rgba(0,0,0,0.4);
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
+}
+
+#resetGame:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 6px 0 #7a3f10,
+    0 10px 28px rgba(0,0,0,0.5);
+}
+
+#resetGame:active {
+  transform: translateY(2px);
+  box-shadow:
+    0 2px 0 #7a3f10,
+    0 4px 12px rgba(0,0,0,0.4);
+}
+
+/* ── Responsive ── */
+@media (max-width: 620px) {
+  td { width: 90px; height: 90px; }
+  table { border-spacing: 6px; }
+  #resetGame { font-size: 0.85rem; padding: 12px 20px; }
+}
